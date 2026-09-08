@@ -42,3 +42,14 @@ export const LinkType = {
 } as const
 
 export type LinkType = (typeof LinkType)[keyof typeof LinkType]
+
+
+export const HomepageSectionType = {
+  HERO: 'HERO',
+  EDITORIAL: 'EDITORIAL',
+  FEATURED_PRODUCTS: 'FEATURED_PRODUCTS',
+  COLLECTIONS: 'COLLECTIONS',
+  TEXT: 'TEXT'
+} as const
+
+export type HomepageSectionType = (typeof HomepageSectionType)[keyof typeof HomepageSectionType]

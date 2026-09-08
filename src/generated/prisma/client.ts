@@ -87,6 +87,16 @@ export type Address = Prisma.AddressModel
  */
 export type CampaignBanner = Prisma.CampaignBannerModel
 /**
+ * Model HomepageSection
+ * 
+ */
+export type HomepageSection = Prisma.HomepageSectionModel
+/**
+ * Model HomepageFeaturedProduct
+ * 
+ */
+export type HomepageFeaturedProduct = Prisma.HomepageFeaturedProductModel
+/**
  * Model StoreSettings
  * 
  */

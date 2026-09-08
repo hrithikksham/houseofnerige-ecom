@@ -60,6 +60,8 @@ export const ModelName = {
   ProductCollection: 'ProductCollection',
   Address: 'Address',
   CampaignBanner: 'CampaignBanner',
+  HomepageSection: 'HomepageSection',
+  HomepageFeaturedProduct: 'HomepageFeaturedProduct',
   StoreSettings: 'StoreSettings',
   ShippingSettings: 'ShippingSettings'
 } as const
@@ -223,6 +225,37 @@ export const CampaignBannerScalarFieldEnum = {
 } as const
 
 export type CampaignBannerScalarFieldEnum = (typeof CampaignBannerScalarFieldEnum)[keyof typeof CampaignBannerScalarFieldEnum]
+
+
+export const HomepageSectionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  status: 'status',
+  sortOrder: 'sortOrder',
+  title: 'title',
+  eyebrow: 'eyebrow',
+  description: 'description',
+  desktopImage: 'desktopImage',
+  mobileImage: 'mobileImage',
+  linkType: 'linkType',
+  linkValue: 'linkValue',
+  settings: 'settings',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HomepageSectionScalarFieldEnum = (typeof HomepageSectionScalarFieldEnum)[keyof typeof HomepageSectionScalarFieldEnum]
+
+
+export const HomepageFeaturedProductScalarFieldEnum = {
+  sectionId: 'sectionId',
+  productId: 'productId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type HomepageFeaturedProductScalarFieldEnum = (typeof HomepageFeaturedProductScalarFieldEnum)[keyof typeof HomepageFeaturedProductScalarFieldEnum]
 
 
 export const StoreSettingsScalarFieldEnum = {

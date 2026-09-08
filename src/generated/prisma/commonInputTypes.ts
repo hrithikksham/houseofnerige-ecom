@@ -297,6 +297,20 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+export type EnumHomepageSectionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomepageSectionType | Prisma.EnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHomepageSectionTypeFilter<$PrismaModel> | $Enums.HomepageSectionType
+}
+
+export type EnumLinkTypeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkType | Prisma.EnumLinkTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumLinkTypeNullableFilter<$PrismaModel> | $Enums.LinkType | null
+}
+
 export type JsonNullableFilter<$PrismaModel = never> =
 | Prisma.PatchUndefined<
     Prisma.Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -319,6 +333,26 @@ export type JsonNullableFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type EnumHomepageSectionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomepageSectionType | Prisma.EnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHomepageSectionTypeWithAggregatesFilter<$PrismaModel> | $Enums.HomepageSectionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumHomepageSectionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumHomepageSectionTypeFilter<$PrismaModel>
+}
+
+export type EnumLinkTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkType | Prisma.EnumLinkTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumLinkTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.LinkType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLinkTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLinkTypeNullableFilter<$PrismaModel>
 }
 
 export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
@@ -642,6 +676,40 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumHomepageSectionTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomepageSectionType | Prisma.EnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHomepageSectionTypeFilter<$PrismaModel> | $Enums.HomepageSectionType
+}
+
+export type NestedEnumLinkTypeNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkType | Prisma.EnumLinkTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumLinkTypeNullableFilter<$PrismaModel> | $Enums.LinkType | null
+}
+
+export type NestedEnumHomepageSectionTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.HomepageSectionType | Prisma.EnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HomepageSectionType[] | Prisma.ListEnumHomepageSectionTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHomepageSectionTypeWithAggregatesFilter<$PrismaModel> | $Enums.HomepageSectionType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumHomepageSectionTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumHomepageSectionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumLinkTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LinkType | Prisma.EnumLinkTypeFieldRefInput<$PrismaModel> | null
+  in?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.LinkType[] | Prisma.ListEnumLinkTypeFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumLinkTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.LinkType | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLinkTypeNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLinkTypeNullableFilter<$PrismaModel>
 }
 
 export type NestedJsonNullableFilter<$PrismaModel = never> =

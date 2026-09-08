@@ -30,6 +30,14 @@ enum LinkType {
   CUSTOM
 }
 
+enum HomepageSectionType {
+  HERO
+  EDITORIAL
+  FEATURED_PRODUCTS
+  COLLECTIONS
+  TEXT
+}
+
 model User {
   id        String   @id @default(uuid())
   authId    String   @unique
@@ -63,15 +71,15 @@ model Category {
 }
 
 model Collection {
-  id          String              @id @default(uuid())
+  id          String        @id @default(uuid())
   name        String
-  slug        String              @unique
+  slug        String        @unique
   image       String?
   description String?
-  sortOrder   Int                 @default(0)
-  status      ContentStatus       @default(DRAFT)
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  sortOrder   Int           @default(0)
+  status      ContentStatus @default(DRAFT)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   productCollections ProductCollection[]
 
@@ -80,27 +88,38 @@ model Collection {
 }
 
 model Product {
-  id                String        @id @default(uuid())
-  name              String
-  slug              String        @unique
-  sku               String        @unique
-  shortDescription  String?
-  description       String?
-  regularPrice      Decimal       @db.Decimal(10, 2)
-  discountPercent   Decimal       @default(0) @db.Decimal(5, 2)
-  categoryId        String
-  stockQuantity     Int           @default(0)
-  lowStockThreshold Int           @default(3)
-  isNewArrival      Boolean       @default(false)
-  isFeatured        Boolean       @default(false)
-  status            ProductStatus @default(DRAFT)
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
+  id               String  @id @default(uuid())
+  name             String
+  slug             String  @unique
+  sku              String  @unique
+  shortDescription String?
+  description      String?
 
-  category           Category              @relation(fields: [categoryId], references: [id], onDelete: Restrict)
-  specification      ProductSpecification?
-  images             ProductImage[]
+  regularPrice    Decimal @db.Decimal(10, 2)
+  discountPercent Decimal @default(0) @db.Decimal(5, 2)
+
+  categoryId String
+
+  stockQuantity     Int @default(0)
+  lowStockThreshold Int @default(3)
+
+  isNewArrival Boolean @default(false)
+  isFeatured   Boolean @default(false)
+
+  status ProductStatus @default(DRAFT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  specification ProductSpecification?
+
+  images ProductImage[]
+
   productCollections ProductCollection[]
+
+  featuredSections HomepageFeaturedProduct[]
 
   @@index([categoryId])
   @@index([status])
@@ -110,29 +129,38 @@ model Product {
 }
 
 model ProductSpecification {
-  id                  String   @id @default(uuid())
-  productId           String   @unique
-  fabric              String?
-  colour              String?
-  sareeLength         Decimal? @db.Decimal(5, 2)
+  id        String @id @default(uuid())
+  productId String @unique
+
+  fabric String?
+  colour String?
+
+  sareeLength Decimal? @db.Decimal(5, 2)
+
   blousePieceIncluded Boolean  @default(false)
   blousePieceLength   Decimal? @db.Decimal(5, 2)
-  workWeave           String?
-  occasion            String?
-  careInstructions    String?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+
+  workWeave        String?
+  occasion         String?
+  careInstructions String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model ProductImage {
-  id        String   @id @default(uuid())
+  id String @id @default(uuid())
+
   productId String
-  imageUrl  String
-  altText   String?
-  sortOrder Int      @default(0)
-  isPrimary Boolean  @default(false)
+
+  imageUrl String
+  altText  String?
+
+  sortOrder Int     @default(0)
+  isPrimary Boolean @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -145,9 +173,11 @@ model ProductImage {
 model ProductCollection {
   productId    String
   collectionId String
-  createdAt    DateTime   @default(now())
 
-  product    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   collection Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
 
   @@id([productId, collectionId])
@@ -155,20 +185,27 @@ model ProductCollection {
 }
 
 model Address {
-  id            String   @id @default(uuid())
-  userId        String
+  id String @id @default(uuid())
+
+  userId String
+
   recipientName String
   phone         String
-  addressLine1  String
-  addressLine2  String?
-  city          String
-  state         String
-  pinCode       String
-  country       String   @default("India")
-  landmark      String?
-  isDefault     Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+
+  addressLine1 String
+  addressLine2 String?
+
+  city    String
+  state   String
+  pinCode String
+
+  country  String  @default("India")
+  landmark String?
+
+  isDefault Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -176,42 +213,110 @@ model Address {
 }
 
 model CampaignBanner {
-  id           String    @id @default(uuid())
-  name         String
+  id String @id @default(uuid())
+
+  name String
+
   desktopImage String
   mobileImage  String?
-  linkType     LinkType
-  linkValue    String
-  startDate    DateTime?
-  endDate      DateTime?
-  isActive     Boolean   @default(false)
-  priority     Int       @default(0)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+
+  linkType  LinkType
+  linkValue String
+
+  startDate DateTime?
+  endDate   DateTime?
+
+  isActive Boolean @default(false)
+  priority Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([isActive])
   @@index([priority])
+  @@index([startDate])
+  @@index([endDate])
+}
+
+model HomepageSection {
+  id String @id @default(uuid())
+
+  name String
+
+  type HomepageSectionType
+
+  status ContentStatus @default(DRAFT)
+
+  sortOrder Int @default(0)
+
+  title       String?
+  eyebrow     String?
+  description String?
+
+  desktopImage String?
+  mobileImage  String?
+
+  linkType  LinkType?
+  linkValue String?
+
+  settings Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  featuredProducts HomepageFeaturedProduct[]
+
+  @@index([status])
+  @@index([sortOrder])
+  @@index([type])
+}
+
+model HomepageFeaturedProduct {
+  sectionId String
+  productId String
+
+  sortOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  section HomepageSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([sectionId, productId])
+  @@index([productId])
+  @@index([sortOrder])
 }
 
 model StoreSettings {
-  id          String   @id @default(uuid())
-  storeName   String
-  email       String?
-  phone       String?
-  whatsapp    String?
-  address     String?
-  logo        String?
-  favicon     String?
+  id String @id @default(uuid())
+
+  storeName String
+
+  email    String?
+  phone    String?
+  whatsapp String?
+
+  address String?
+
+  logo    String?
+  favicon String?
+
   socialLinks Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ShippingSettings {
-  id                      String   @id @default(uuid())
-  standardShippingAmount  Decimal  @default(0) @db.Decimal(10, 2)
-  freeShippingThreshold   Decimal? @db.Decimal(10, 2)
-  isShippingEnabled       Boolean  @default(true)
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
+  id String @id @default(uuid())
+
+  standardShippingAmount Decimal @default(0) @db.Decimal(10, 2)
+
+  freeShippingThreshold Decimal? @db.Decimal(10, 2)
+
+  isShippingEnabled Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
